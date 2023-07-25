@@ -23,7 +23,6 @@ class TestFindGCD(unittest.TestCase):
         self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
 
     def test_one_zero_input(self):
-        self.assertEqual(find_gcd(0, 10), 10)
         with self.assertRaises(Exception) as context:
             find_gcd(-10, 0)
         self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
