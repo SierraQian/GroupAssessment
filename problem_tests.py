@@ -1,8 +1,8 @@
 # problem_tests.py
-import unittest
+import pytest
 from problem1_func import find_gcd
 
-class TestFindGCD(unittest.TestCase):
+class TestFindGCD(pytest.TestCase):
 
     def test_positive_integers(self):
         self.assertEqual(find_gcd(15, 25), 5)
@@ -41,4 +41,4 @@ class TestFindGCD(unittest.TestCase):
         self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
