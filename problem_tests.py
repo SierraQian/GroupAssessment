@@ -1,44 +1,16 @@
-# problem_tests.py
 import pytest
 from problem1_func import find_gcd
 
-class TestFindGCD(pytest.TestCase):
+@pytest.mark.parametrize("a, b, denom",
+                         [(6, 3, 3), (8, 4, 4), (8, 6, 2),
+                          (60, 35, 5), (56, 8, 8), (8, 56, 8)])
 
-    def test_positive_integers(self):
-        self.assertEqual(find_gcd(15, 25), 5)
-        self.assertEqual(find_gcd(50, 20), 10)
-        self.assertEqual(find_gcd(36, 48), 12)
+def test_gcd(a, b, denom):
+    assert find_gcd(a, b) == denom
 
-    def test_negative_numbers(self):
-        with self.assertRaises(Exception) as context:
-            find_gcd(-15, 25)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
+@pytest.mark.parametrize("a, b, denom",
+                         [("", True, 3), ("a", "b", 0), ("six", "one", 1), (0, 2, 0), (-4, -2, 2)])
 
-        with self.assertRaises(Exception) as context:
-            find_gcd(-50, -20)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-        with self.assertRaises(Exception) as context:
-            find_gcd(-36, 48)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-    def test_one_zero_input(self):
-        with self.assertRaises(Exception) as context:
-            find_gcd(-10, 0)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-        with self.assertRaises(Exception) as context:
-            find_gcd(0, 0)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-    def test_non_integer_input(self):
-        with self.assertRaises(Exception) as context:
-            find_gcd(15, 3.5)
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-        with self.assertRaises(Exception) as context:
-            find_gcd(50, "hello")
-        self.assertEqual(str(context.exception), "Both inputs must be positive integers.")
-
-if __name__ == '__main__':
-    pytest.main()
+def test_gcd_arg_types(a, b, denom):
+    with pytest.raises(Exception):
+        find_gcd(a, b)
